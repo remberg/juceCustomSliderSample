@@ -57,8 +57,7 @@ public:
 			setUsingNativeTitleBar(true);
 			setContentOwned(new MainContentComponent(), true);
 			centreWithSize(getWidth(), getHeight());
-			
-			
+						
 			//make the windows resizable
 			setResizable(true, true);
 			//only resizable withe fixed ratio
@@ -66,8 +65,6 @@ public:
 			//set the resizable limits
 			setResizeLimits(400, 200, 1000, 500);
 			
-
-
 			setVisible(true);
 		}
 
