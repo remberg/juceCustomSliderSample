@@ -1,4 +1,3 @@
-
 /*
   ==============================================================================
 
@@ -11,7 +10,7 @@
 #pragma once
 #include "../JuceLibraryCode/JuceHeader.h"
 
-#pragma region myLookAndFeelV1
+//==============================================================================
 class myLookAndFeelV1 : public LookAndFeel_V4
 {
 public:
@@ -20,12 +19,15 @@ public:
 	void drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
 		float rotaryStartAngle, float rotaryEndAngle, Slider& slider) override;
 
-};
-#pragma endregion
+private:
+Image img1;
 
-#pragma region myLookAndFeelV2
+};
+
+//==============================================================================
 class myLookAndFeelV2 : public LookAndFeel_V4
 {
+
 public:
 	myLookAndFeelV2();
 
@@ -33,16 +35,18 @@ public:
 		float rotaryStartAngle, float rotaryEndAngle, Slider& slider) override;
 
 };
-#pragma endregion
 
-#pragma region myLookAndFeelV3
+//==============================================================================
 class myLookAndFeelV3 : public LookAndFeel_V4
 {
+
 public:
 	myLookAndFeelV3();
 
 	void drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
 		float rotaryStartAngle, float rotaryEndAngle, Slider& slider) override;
 
+private:
+	Image img2;
+
 };
-#pragma endregion
