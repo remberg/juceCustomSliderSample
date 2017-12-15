@@ -1,4 +1,3 @@
-
 /*
   ==============================================================================
 
@@ -10,20 +9,28 @@
 
 #include "myLookAndFeel.h"
 
-#pragma region myLookAndFeelV1
+//==============================================================================
 myLookAndFeelV1::myLookAndFeelV1()
 {
-	setColourScheme(LookAndFeel_V4::getDarkColourScheme());
+	File knobImageFile1 = File::getSpecialLocation
+		(File::SpecialLocationType::userDesktopDirectory).getChildFile("knob1.png");
+	img1 = ImageCache::getFromFile(knobImageFile1);
 }
 
-void myLookAndFeelV1::drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
+//==============================================================================
+void myLookAndFeelV1::drawRotarySlider(Graphics& g,
+	int x, int y, int width, int height, float sliderPos,
 	float rotaryStartAngle, float rotaryEndAngle, Slider& slider)
 {
-	File knobFile = File::getSpecialLocation(File::SpecialLocationType::userDesktopDirectory).getChildFile("knob1.png");
-	if (knobFile.exists()) {
-		Image myKnobStrip = ImageFileFormat::loadFrom(knobFile);
-		const double rotation = (slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum());
-		const int frames = myKnobStrip.getHeight() / myKnobStrip.getWidth();
+
+	if (img1.isValid())
+	 {
+		const double rotation = (slider.getValue() 
+			 - slider.getMinimum())
+			 / (slider.getMaximum()
+			 - slider.getMinimum());
+
+		const int frames = img1.getHeight() / img1.getWidth();
 		const int frameId = (int)ceil(rotation * ((double)frames - 1.0));
 		const float radius = jmin(width / 2.0f, height / 2.0f);
 		const float centerX = x + width * 0.5f;
@@ -31,21 +38,21 @@ void myLookAndFeelV1::drawRotarySlider(Graphics& g, int x, int y, int width, int
 		const float rx = centerX - radius - 1.0f;
 		const float ry = centerY - radius;
 
-		g.drawImage(myKnobStrip,
+		g.drawImage(img1,
 			(int)rx,
 			(int)ry,
 			2 * (int)radius,
 			2 * (int)radius,
 			0,
-			frameId*myKnobStrip.getWidth(),
-			myKnobStrip.getWidth(),
-			myKnobStrip.getWidth());
+			frameId*img1.getWidth(),
+			img1.getWidth(),
+			img1.getWidth());
 	}
 	else
 	{
-		static const float TEXT_W_PERCENT = 0.35f;
-		Rectangle<float> text_bounds(1.0f + width * (1.0f - TEXT_W_PERCENT) / 2.0f,
-			0.5f * height, width * TEXT_W_PERCENT, 0.5f * height);
+		static const float textPpercent = 0.35f;
+		Rectangle<float> text_bounds(1.0f + width * (1.0f - textPpercent) / 2.0f,
+			0.5f * height, width * textPpercent, 0.5f * height);
 
 		g.setColour(Colours::white);
 
@@ -53,17 +60,16 @@ void myLookAndFeelV1::drawRotarySlider(Graphics& g, int x, int y, int width, int
 			Justification::horizontallyCentred | Justification::centred, 1);
 	}
 }
-#pragma endregion
 
-#pragma region myLookAndFeelV2
+//==============================================================================
 myLookAndFeelV2::myLookAndFeelV2()
 {
-	setColourScheme(LookAndFeel_V4::getDarkColourScheme());
-	setColour(Slider::rotarySliderFillColourId, Colours::white);
 }
 
-void myLookAndFeelV2::drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
-	float rotaryStartAngle, float rotaryEndAngle, Slider& slider)
+//==============================================================================
+void myLookAndFeelV2::drawRotarySlider(Graphics& g, 
+		int x, int y, int width, int height, float sliderPos,
+		float rotaryStartAngle, float rotaryEndAngle, Slider& slider)
 {
 	const float radius = jmin(width / 2, height / 2) *0.85f;
 	const float centreX = x + width * 0.5f;
@@ -73,7 +79,9 @@ void myLookAndFeelV2::drawRotarySlider(Graphics& g, int x, int y, int width, int
 	const float rw = radius * 2.0f;
 	float fwidth = (float)width;
 	float fheight = (float)height;
-	const float angle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
+	const float angle = rotaryStartAngle 
+					  + sliderPos
+					  * (rotaryEndAngle - rotaryStartAngle);
 
 	g.setColour(Colour(0xff39587a));
 	Path filledArc;
@@ -98,25 +106,32 @@ void myLookAndFeelV2::drawRotarySlider(Graphics& g, int x, int y, int width, int
 	const float dotradius = radius * (float)0.4;
 	const float dotradius2 = rw * (float)0.4;
 	g.setColour(Colour(0xff39587a));
-	g.fillEllipse(centreX - (dotradius), centreY - (dotradius), dotradius2, dotradius2);
+	g.fillEllipse(centreX - (dotradius), 
+				  centreY - (dotradius),
+				  dotradius2, dotradius2);
 }
-#pragma endregion
 
-#pragma region myLookAndFeelV3
+//==============================================================================
 myLookAndFeelV3::myLookAndFeelV3()
 {
-	setColourScheme(LookAndFeel_V4::getDarkColourScheme());
-	setColour(Slider::rotarySliderFillColourId, Colours::white);
+	File knobImageFile2 = File::getSpecialLocation
+		(File::SpecialLocationType::userDesktopDirectory).getChildFile("knob2.png");
+	img2 = ImageCache::getFromFile(knobImageFile2);
 }
 
-void myLookAndFeelV3::drawRotarySlider(Graphics& g, int x, int y, int width, int height, float sliderPos,
+//==============================================================================
+void myLookAndFeelV3::drawRotarySlider(Graphics& g,
+	int x, int y, int width, int height, float sliderPos,
 	float rotaryStartAngle, float rotaryEndAngle, Slider& slider)
 {
-	File knobFile = File::getSpecialLocation(File::SpecialLocationType::userDesktopDirectory).getChildFile("knob2.png");
-	if (knobFile.exists()) {
-		Image myKnobStrip = ImageFileFormat::loadFrom(knobFile);
-		const double rotation = (slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum());
-		const int frames = myKnobStrip.getHeight() / myKnobStrip.getWidth();
+	if (img2.isValid())
+	{
+		const double rotation = (slider.getValue() 
+			 - slider.getMinimum())
+			 / (slider.getMaximum()
+			 - slider.getMinimum());
+
+		const int frames = img2.getHeight() / img2.getWidth();
 		const int frameId = (int)ceil(rotation * ((double)frames - 1.0));
 		const float radius = jmin(width / 2.0f, height / 2.0f);
 		const float centerX = x + width * 0.5f;
@@ -124,21 +139,21 @@ void myLookAndFeelV3::drawRotarySlider(Graphics& g, int x, int y, int width, int
 		const float rx = centerX - radius - 1.0f;
 		const float ry = centerY - radius;
 
-		g.drawImage(myKnobStrip,
+		g.drawImage(img2,
 			(int)rx,
 			(int)ry,
 			2 * (int)radius,
 			2 * (int)radius,
 			0,
-			frameId*myKnobStrip.getWidth(),
-			myKnobStrip.getWidth(),
-			myKnobStrip.getWidth());
+			frameId*img2.getWidth(),
+			img2.getWidth(),
+			img2.getWidth());
 	}
 	else
 	{
-		static const float TEXT_W_PERCENT = 0.35f;
-		Rectangle<float> text_bounds(1.0f + width * (1.0f - TEXT_W_PERCENT) / 2.0f,
-			0.5f * height, width * TEXT_W_PERCENT, 0.5f * height);
+		static const float textPpercent = 0.35f;
+		Rectangle<float> text_bounds(1.0f + width * (1.0f - textPpercent) / 2.0f,
+			0.5f * height, width * textPpercent, 0.5f * height);
 
 		g.setColour(Colours::white);
 
@@ -146,4 +161,3 @@ void myLookAndFeelV3::drawRotarySlider(Graphics& g, int x, int y, int width, int
 			Justification::horizontallyCentred | Justification::centred, 1);
 	}
 }
-#pragma endregion
