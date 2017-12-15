@@ -14,7 +14,7 @@
 MainContentComponent::MainContentComponent()
 {
 	addAndMakeVisible(myKnobSlider1);
-    myKnobSlider1.setLookAndFeel(&myLookAndFeelV1);
+    	myKnobSlider1.setLookAndFeel(&myLookAndFeelV1);
 	myKnobSlider1.setSliderStyle(Slider::RotaryVerticalDrag);
 	myKnobSlider1.setTextBoxStyle(Slider::TextBoxBelow, false, 60, 20);
 
@@ -37,7 +37,7 @@ MainContentComponent::~MainContentComponent()
 
 void MainContentComponent::paint (Graphics& g)
 {
-    g.fillAll (Colours::black);
+    	g.fillAll (Colours::black);
 	g.setFont(Font(14.0f));
 	g.setColour(Colours::grey);
 	g.drawText("Search Path: " + File::getSpecialLocation(
