@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/.vs
+/Builds/VisualStudio2017
+/JuceLibraryCode
