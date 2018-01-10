@@ -13,7 +13,7 @@
 #include "myLookAndFeel.h"
 //==============================================================================
 
-class MainContentComponent   : public Component
+class MainContentComponent : public Component
 {
 public:
     //==============================================================================
@@ -24,12 +24,12 @@ public:
     void resized() override;
 
 private:
-	myLookAndFeelV1 myLookAndFeelV1;
-	myLookAndFeelV2 myLookAndFeelV2;
-	myLookAndFeelV3 myLookAndFeelV3;
-	Slider myKnobSlider1;
-	Slider myKnobSlider2;
-	Slider myKnobSlider3;
+    myLookAndFeelV1 myLookAndFeelV1;
+    myLookAndFeelV2 myLookAndFeelV2;
+    myLookAndFeelV3 myLookAndFeelV3;
+    Slider myKnobSlider1;
+    Slider myKnobSlider2;
+    Slider myKnobSlider3;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };
