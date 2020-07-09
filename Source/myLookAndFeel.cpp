@@ -25,10 +25,10 @@ void myLookAndFeelV1::drawRotarySlider(Graphics& g,
 
     if (img1.isValid())
     {
-        const double rotation = (slider.getValue()
+        const double rotation = std::pow((slider.getValue()
             - slider.getMinimum())
             / (slider.getMaximum()
-                - slider.getMinimum());
+                - slider.getMinimum()), slider.getSkewFactor());
 
         const int frames = img1.getHeight() / img1.getWidth();
         const int frameId = (int)ceil(rotation * ((double)frames - 1.0));
